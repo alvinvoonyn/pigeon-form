@@ -1,0 +1,26 @@
+<div ng-show="isLoading" class="spinner"></div>
+
+<div class="col-xs-12 col-sm-12 col-md-12" ng-show="isLoading == false">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="close()">&times;</button>
+        <h4 class="modal-title">Edit</h4>
+    </div>
+    <div class="modal-body">
+        <div class="spinner" ng-show="modalLoading == true"></div>
+        <form class="form-horizontal" ng-show="modalLoading == false">
+            <div class="form-group" ng-repeat="(key, result) in selectedData">
+                <label class="control-label col-sm-3" for="{{key}}">{{key}}:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="{{key}}" ng-model="selectedData[key]" ng-readonly="tableStructure['indexCol'][key] == 'PRI' || tableStructure['indexCol'][key] == 'UNI'">
+                    <span ng-show="existed == key" style="color:red; font-style:italic;">The data is existed. Please insert another data.</span>
+                    <span ng-show="validateMsg[$index] != 'Validated'" style="color:red; font-style:italic;">{{validateMsg[$index]}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+        <button type="button" class="btn btn-success" ng-click="submit()">Edit</button>
+    </div>
+</div>
+
